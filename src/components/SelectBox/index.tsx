@@ -2,8 +2,11 @@ import { useRef } from "react";
 import styles from "./index.module.scss";
 
 type Props = {
-  options: string[];
-  value: string;
+  options: {
+    key: string;
+    value: string;
+  }[];
+  value?: string;
   onChange: (value: string) => void;
 };
 
@@ -14,8 +17,8 @@ const SelectBox: React.FC<Props> = ({ options, value, onChange }) => {
     <div className={styles.selectBox} onClick={() => selectRef.current?.focus()}>
       <select ref={selectRef} className={styles.select} value={value} onChange={(e) => onChange(e.target.value)}>
         {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+          <option key={option.key} value={option.value}>
+            {option.value}
           </option>
         ))}
       </select>
