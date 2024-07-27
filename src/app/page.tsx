@@ -11,19 +11,22 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const { list, loading, error } = useAppSelector((state) => state.movies);
 
-  const [search, setSearch] = useState("");
+  function doSearch(search: string) {
+    dispatch(fetchMovies(search));
+  }
 
   useEffect(() => {
-    dispatch(fetchMovies("Pokemon"));
-  }, [dispatch]);
-
-  console.log({ list, loading, error });
+    doSearch("Pokemon");
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-4 p-24">
       <h1 className="text-4xl font-bold">Movies</h1>
-      <SearchBox search={search} onSearch={setSearch} />
-      {loading ? <p>Loading...</p> : error ? <p>{error}</p> : <MovieList movies={list} />}
+      <SearchBox onSubmit={(search) => doSearch(search)} />
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {!loading && !error && !list && <p>No movies found</p>}
+      {list && list.length > 0 && <MovieList movies={list} />}
     </main>
   );
 }

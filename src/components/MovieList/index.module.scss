@@ -22,6 +22,27 @@
     transform: scale(1.05);
   }
 
+  .poster {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+
+    .noPoster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
   img {
     width: 100%;
     height: auto;

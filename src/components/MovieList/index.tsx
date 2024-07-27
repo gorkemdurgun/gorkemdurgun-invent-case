@@ -12,7 +12,24 @@ type MovieCardProps = {
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
     <div className={styles.card}>
-      <Image src={movie.Poster} alt={movie.Title} width={280} height={420} />
+     {
+      movie.Poster === "N/A" ? (
+        <div className={styles.poster}>
+          <div className={styles.noPoster}>
+            <p>Any poster available</p>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.poster}>
+          <Image
+            src={movie.Poster}
+            alt={movie.Title}
+            width={300}
+            height={450}
+          />
+        </div>
+      )
+     }
       <div className={styles.info}>
         <h3 className="text-xl">{movie.Title}</h3>
         <div className={styles.metaList}>
