@@ -1,8 +1,8 @@
-import { fetchMovies } from "@/services/fetchMovies";
+import { services } from "@/services";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface MovieState {
-  list: any[];
+  list: Movie[];
   loading: boolean;
   error: string | null;
 }
@@ -19,14 +19,14 @@ const moviesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMovies.pending, (state) => {
+      .addCase(services.fetchMovies.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchMovies.fulfilled, (state, action) => {
+      .addCase(services.fetchMovies.fulfilled, (state, action) => {
         state.loading = false;
         state.list = action.payload;
       })
-      .addCase(fetchMovies.rejected, (state, action) => {
+      .addCase(services.fetchMovies.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Something went wrong";
       });

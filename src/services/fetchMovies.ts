@@ -1,7 +1,7 @@
+import api from "@/utils/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
 export const fetchMovies = createAsyncThunk("movies/fetchMovies", async (term: string) => {
-  const response = await axios.get(`http://www.omdbapi.com/?s=${term}&apikey=YOUR_API_KEY`);
+  const response = await api.get(`?s=${term}`);
   return response.data.Search;
 });

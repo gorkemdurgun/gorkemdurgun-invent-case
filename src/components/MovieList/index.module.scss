@@ -1,0 +1,103 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 24px;
+  width: 100%;
+}
+
+.card {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 0.5rem; /* Köşe yuvarlatma */
+  transition: transform 0.3s ease-in-out;
+  text-align: center;
+  border: 2px white solid;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+
+  .info {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 1rem;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+
+    h3,
+    p {
+      margin: 0;
+    }
+
+    .metaList {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 0.5rem;
+
+      .metaItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 0.2rem;
+      }
+    }
+
+    .overlay-info {
+      display: none;
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    z-index: 2;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &:hover .info {
+    bottom: 0;
+  }
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+}
