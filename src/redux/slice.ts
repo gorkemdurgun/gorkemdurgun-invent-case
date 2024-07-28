@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface MovieState {
   list: Movie[];
   totalResults: number;
+  yearList: OptionItem[];
   loading: boolean;
   error: string | null;
 }
@@ -11,6 +12,7 @@ interface MovieState {
 const initialState: MovieState = {
   list: [],
   totalResults: 0,
+  yearList: [],
   loading: false,
   error: null,
 };
@@ -28,6 +30,7 @@ const moviesSlice = createSlice({
         state.loading = false;
         state.list = action.payload.list;
         state.totalResults = action.payload.totalResults;
+        state.yearList = action.payload.yearList;
       })
       .addCase(services.fetchMovies.rejected, (state, action) => {
         state.loading = false;
