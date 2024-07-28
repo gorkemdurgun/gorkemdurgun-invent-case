@@ -138,11 +138,16 @@
 }
 
 .tableHead {
-  background-color: #eceff1;
+  background-color: whitesmoke;
   color: black;
   position: sticky;
   top: 0;
   z-index: 1;
+
+  > tr > th {
+    font-weight: 500;
+    padding-block: 10px;
+  }
 }
 
 .tableRow {

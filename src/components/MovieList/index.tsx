@@ -52,8 +52,14 @@ const GridCard: React.FC<CardProps> = ({ movie }) => {
   );
 };
 const TableCard: React.FC<CardProps> = ({ movie }) => {
+  const router = useRouter();
   return (
-    <tr className={styles.tableRow}>
+    <tr
+      className={styles.tableRow}
+      onClick={() => {
+        router.push(`/movies/${movie.imdbID}`);
+      }}
+    >
       <td className={styles.tableCell}>
         {movie.Poster === "N/A" ? (
           <div className={styles.poster}>
