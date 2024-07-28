@@ -1,9 +1,6 @@
-import Image from "next/image";
 import styles from "./index.module.scss";
-import { PiArrowFatRightDuotone as GoDetailIcon, PiX as NotFoundIcon } from "react-icons/pi";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { useRouter } from "next/navigation";
-import { services } from "@/services";
+import { useAppSelector } from "@/hooks";
+import Loading from "@/components/common/Loading";
 import MovieTableCard from "../MovieTableCard";
 import MovieGridCard from "../MovieGridCard";
 
@@ -22,8 +19,8 @@ const MovieList: React.FC<Props> = ({ displayType, onError }) => {
     onError && onError();
   }
 
-  if (loading) {
-    return <p className="text-center text-white">Loading...</p>;
+  if (!loading) {
+    return <Loading />;
   }
 
   if (error) {
