@@ -10,6 +10,12 @@ type Props = {
 const Pagination: React.FC<Props> = ({ totalResults, perPage, currentPage, onPageChange }) => {
   const totalPages = Math.ceil(totalResults / perPage);
 
+  console.log(totalResults);
+
+  if (totalResults === 0 || totalPages === 1) {
+    return null;
+  }
+
   return (
     <div className={styles.pagination}>
       {Array.from({ length: totalPages }).map((_, index) => (

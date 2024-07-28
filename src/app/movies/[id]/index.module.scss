@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  gap: 20px;
 }
 
 .divider {
@@ -9,67 +10,95 @@
   margin-top: 20px;
 }
 
-.list {
+.breadcrumb {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  gap: 5px;
+  margin-block: 20px;
 
-  &[data-type="categories"] {
-    .listItem {
-      background-color: hsla(45, 90%, 65%, 0.1);
-      color: hsl(45, 90%, 65%);
-    }
-  }
-  &[data-type="writers"] {
-    .listItem {
-      background-color: hsla(23, 90%, 65%, 0.1);
-      color: hsl(23, 90%, 65%);
-    }
-  }
-  &[data-type="actors"] {
-    .listItem {
-      background-color: hsla(293, 90%, 65%, 0.1);
-      color: hsl(293, 90%, 65%);
-    }
-  }
-  &[data-type="languages"] {
-    .listItem {
-      background-color: hsla(0, 100%, 67%, 0.1);
-      color: hsl(0, 100%, 67%);
-    }
-  }
-
-  .title {
-    font-size: 24px;
-    font-weight: bold;
+  .breadcrumbItem {
+    font-size: 16px;
     color: white;
-  }
+    cursor: pointer;
 
-  .listItems {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-wrap: wrap;
-
-    .listItem {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      border-radius: 10px;
-
-      .text,
-      .icon {
-        font-size: 18px;
+    &:last-child {
+      color: gray;
+      cursor: default;
+      pointer-events: none;
+      &::after {
+        content: "";
       }
+    }
+
+    &::after {
+      content: ">";
+      color: white;
+      margin: 0 10px;
     }
   }
 }
 
-.header {
+.main {
   display: grid;
   grid-template-columns: 300px 5fr 2fr;
   gap: 20px;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &[data-type="categories"] {
+      .listItem {
+        background-color: hsla(45, 90%, 65%, 0.1);
+        color: hsl(45, 90%, 65%);
+      }
+    }
+    &[data-type="directors"] {
+        .listItem {
+          background-color: hsla(12, 90%, 65%, 0.1);
+          color: hsl(12, 90%, 65%);
+        }
+      }
+    &[data-type="writers"] {
+      .listItem {
+        background-color: hsla(23, 90%, 65%, 0.1);
+        color: hsl(23, 90%, 65%);
+      }
+    }
+    &[data-type="actors"] {
+      .listItem {
+        background-color: hsla(293, 90%, 65%, 0.1);
+        color: hsl(293, 90%, 65%);
+      }
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .listItems {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      .listItem {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 10px;
+
+        .text,
+        .icon {
+          font-size: 18px;
+        }
+      }
+    }
+  }
 
   .leftContainer {
     display: flex;
@@ -97,16 +126,49 @@
         height: auto;
         transition: transform 0.5s;
       }
+
+      .noPoster {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: hsla(0, 0%, 20%, 0.15);
+        color: white;
+        font-size: 24px;
+      }
     }
 
-    .country {
-      color: gray;
+    .briefContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 10px;
+
+      .brief {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        gap: 10px;
+
+        .icon {
+          font-size: 20px;
+          color: gray;
+          margin-top: 2px;
+        }
+
+        .text {
+          font-size: 16px;
+          color: gray;
+        }
+      }
     }
   }
 
-  .infoContainer {
+  .middleContainer {
     display: flex;
     flex-direction: column;
+
     padding: 20px;
     background-color: hsla(0, 0%, 20%, 0.15);
 
@@ -115,7 +177,6 @@
       flex-direction: row;
       justify-content: space-between;
       gap: 10px;
-      padding-bottom: 10px;
 
       .releaseDate {
         display: flex;
@@ -154,10 +215,10 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      border-top: 2px solid white;
+      padding-top: 20px;
 
       .title {
-        font-size: 24px;
+        font-size: 32px;
         font-weight: bold;
         color: white;
       }
@@ -165,6 +226,61 @@
       .description {
         font-size: 16px;
         color: white;
+      }
+    }
+
+    .extraInformations {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      margin-top: auto;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      .imdbId {
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 10px;
+        color: white;
+        background-color: hsla(0, 0%, 51%, 0.15);
+
+        &::before {
+          content: "IMDB ID: #";
+        }
+      }
+
+      .ratingContainer {
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+
+        .score {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+
+          .rating {
+            font-size: 20px;
+            color: white;
+          }
+
+          .text {
+            font-size: 16px;
+            color: lightgray;
+          }
+        }
+
+        .stars {
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+          color: orange;
+
+          .star {
+            font-size: 24px;
+          }
+        }
       }
     }
   }

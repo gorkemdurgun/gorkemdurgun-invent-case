@@ -45,6 +45,8 @@ const moviesSlice = createSlice({
       })
       .addCase(services.getMovies.rejected, (state, action) => {
         state.loading = false;
+        state.list = [];
+        state.totalResults = 0;
         state.error = action.error.message || "Something went wrong";
       });
   },

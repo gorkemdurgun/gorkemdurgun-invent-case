@@ -73,7 +73,15 @@ const TableCard: React.FC<CardProps> = ({ movie }) => {
 };
 
 const MovieList: React.FC<Props> = ({ displayType }) => {
-  const { list } = useAppSelector((state) => state.movies);
+  const { list, loading, error } = useAppSelector((state) => state.movies);
+
+  if (loading) {
+    return <p className="text-center text-white">Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return displayType === "grid" ? (
     <ul className={styles.grid}>
