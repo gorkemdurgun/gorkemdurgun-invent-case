@@ -13,24 +13,33 @@ import DisplayTypeButton from "@/components/DisplayTypeButton";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { list, totalResults, initialYearList, loading, error } = useAppSelector((state) => state.movies);
+  const { totalResults, initialYearList } = useAppSelector((state) => state.movies);
 
   const [activeDisplayType, setActiveDisplayType] = useState<"grid" | "table">("grid");
   const [activeSearch, setActiveSearch] = useState("Pokemon");
   const [activePage, setActivePage] = useState(1);
-  const [activeYear, setActiveYear] = useState<string | undefined>(undefined);
-  const [activeGenre, setActiveGenre] = useState<Genre | undefined>(undefined);
+  const [activeYear, setActiveYear] = useState<string>("");
+  const [activeGenre, setActiveGenre] = useState<string>("");
 
   function initialFetch() {
     dispatch(services.getMovies({ term: "Pokemon", page: activePage }));
   }
 
+  function clearFilters() {
+    setActivePage(1);
+    setActiveYear("");
+    setActiveGenre("");
+    dispatch(resetFilter());
+  }
+
+  function onError() {
+    clearFilters();
+    onSearch(activeSearch);
+  }
+
   function onSearch(search: string) {
     setActiveSearch(search);
-    setActiveYear(undefined);
-    setActiveGenre(undefined);
-    setActivePage(1);
-    dispatch(resetFilter());
+    clearFilters();
   }
 
   useEffect(() => {
@@ -47,16 +56,11 @@ export default function Home() {
       <div className="w-full grid grid-cols-[80px_2fr,2fr,5fr] gap-4">
         <DisplayTypeButton activeType={activeDisplayType} onTypeChange={setActiveDisplayType} />
         <SelectBox undefinedValueLabel="All Years" options={initialYearList} value={activeYear} onChange={(value) => setActiveYear(value)} />
-        <SelectBox
-          undefinedValueLabel="All Genres"
-          options={genreOptions}
-          value={activeGenre}
-          onChange={(value) => setActiveGenre(value as Genre)}
-        />
+        <SelectBox undefinedValueLabel="All Genres" options={genreOptions} value={activeGenre} onChange={(value) => setActiveGenre(value)} />
         <SearchBox onSearch={onSearch} />
       </div>
       <div className="w-full flex flex-col items-center gap-4">
-        <MovieList displayType={activeDisplayType} />
+        <MovieList displayType={activeDisplayType} onError={onError} />
         <Pagination totalResults={totalResults} perPage={10} currentPage={activePage} onPageChange={setActivePage} />
       </div>
     </main>

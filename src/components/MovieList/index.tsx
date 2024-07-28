@@ -1,11 +1,13 @@
 import Image from "next/image";
 import styles from "./index.module.scss";
 import { PiArrowFatRightDuotone as GoDetailIcon, PiX as NotFoundIcon } from "react-icons/pi";
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useRouter } from "next/navigation";
+import { services } from "@/services";
 
 type Props = {
   displayType: "grid" | "table";
+  onError?: () => void;
 };
 type CardProps = {
   movie: Movie;
@@ -72,15 +74,23 @@ const TableCard: React.FC<CardProps> = ({ movie }) => {
   );
 };
 
-const MovieList: React.FC<Props> = ({ displayType }) => {
+const MovieList: React.FC<Props> = ({ displayType, onError }) => {
   const { list, loading, error } = useAppSelector((state) => state.movies);
+
+  function handleTryAgain() {
+    onError && onError();
+  }
 
   if (loading) {
     return <p className="text-center text-white">Loading...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <button className="w-full p-2 text-center text-xl text-red-700 bg-red-300 rounded-md" onClick={handleTryAgain}>
+        Any result found, try again with clear filters
+      </button>
+    );
   }
 
   return displayType === "grid" ? (

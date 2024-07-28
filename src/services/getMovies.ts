@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "@/utils/api";
+import { genreOptions } from "@/constants/genre-options";
 
 function createYearList(list: Movie[]): OptionItem[] {
   const years = list.map((movie) => movie.Year.split("–")[0]);
