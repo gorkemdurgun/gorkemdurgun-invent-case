@@ -20,6 +20,7 @@ import {
 } from "react-icons/pi";
 import { timeAgo } from "@/utils/moment";
 import Skeleton from "@/components/Skeleton";
+import Breadcrumb from "@/components/common/Breadcrumb";
 
 const MovieIdPage = () => {
   const pathname = usePathname();
@@ -63,19 +64,15 @@ const MovieIdPage = () => {
 
   return (
     <div className={styles.page}>
-      <div className={styles.breadcrumb}>
-        <a className={styles.breadcrumbItem} href="/">
-          Home
-        </a>
-        <a className={styles.breadcrumbItem} href="/movies">
-          Movies
-        </a>
-        {loading ? (
-          <Skeleton className={styles.breadcrumbSkeleton} skeletonType="text" />
-        ) : (
-          <a className={styles.breadcrumbItem}>{movieDetail?.Title}</a>
-        )}
-      </div>
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Movies", href: "/movies" },
+          {
+            label: movieDetail?.Title,
+          },
+        ]}
+      />
       <div className={styles.main}>
         <div className={styles.leftContainer}>
           {loading ? (

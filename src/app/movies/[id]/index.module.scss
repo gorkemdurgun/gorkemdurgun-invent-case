@@ -10,38 +10,6 @@
   margin-top: 20px;
 }
 
-.breadcrumb {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  margin-block: 20px;
-
-  .breadcrumbSkeleton {
-    width: 200px !important;
-  }
-
-  .breadcrumbItem {
-    font-size: 16px;
-    color: white;
-    cursor: pointer;
-
-    &:last-child {
-      color: gray;
-      cursor: default;
-      pointer-events: none;
-      &::after {
-        content: "";
-      }
-    }
-
-    &::after {
-      content: ">";
-      color: white;
-      margin: 0 10px;
-    }
-  }
-}
-
 .main {
   display: grid;
   grid-template-columns: 300px 5fr 2fr;

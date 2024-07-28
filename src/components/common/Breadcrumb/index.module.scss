@@ -1,0 +1,31 @@
+.breadcrumb {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-block: 20px;
+
+  .skeleton {
+    width: 200px !important;
+  }
+
+  .breadcrumbItem {
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+
+    &:last-child {
+      color: gray;
+      cursor: default;
+      pointer-events: none;
+      &::after {
+        content: "";
+      }
+    }
+
+    &::after {
+      content: ">";
+      color: white;
+      margin: 0 10px;
+    }
+  }
+}

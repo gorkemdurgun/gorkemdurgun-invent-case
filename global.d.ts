@@ -50,3 +50,8 @@ type OptionItem = {
   value: string;
   label: string;
 };
+
+type BreadcrumbItem = {
+  label?: string;
+  href?: string;
+};
