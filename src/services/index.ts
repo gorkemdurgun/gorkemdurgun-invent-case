@@ -1,5 +1,7 @@
-import { fetchMovies } from "./fetchMovies";
+import { getMovies } from "./getMovies";
+import { getMovieById } from "./getMovieById";
 
 export const services = {
-  fetchMovies,
+  getMovies,
+  getMovieById,
 };

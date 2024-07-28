@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./index.module.scss";
 import { PiArrowFatRightDuotone as GoDetailIcon, PiX as NotFoundIcon } from "react-icons/pi";
 import { useAppSelector } from "@/hooks";
+import { useRouter } from "next/navigation";
 
 type Props = {
   displayType: "grid" | "table";
@@ -11,8 +12,14 @@ type CardProps = {
 };
 
 const GridCard: React.FC<CardProps> = ({ movie }) => {
+  const router = useRouter();
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onClick={() => {
+        router.push(`/movies/${movie.imdbID}`);
+      }}
+    >
       {movie.Poster === "N/A" ? (
         <div className={styles.poster}>
           <div className={styles.noPoster}>

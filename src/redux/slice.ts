@@ -29,11 +29,11 @@ const moviesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(services.fetchMovies.pending, (state) => {
+      .addCase(services.getMovies.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(services.fetchMovies.fulfilled, (state, action) => {
+      .addCase(services.getMovies.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.list = action.payload.list;
@@ -43,7 +43,7 @@ const moviesSlice = createSlice({
           state.initialYearList = action.payload.yearList;
         }
       })
-      .addCase(services.fetchMovies.rejected, (state, action) => {
+      .addCase(services.getMovies.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Something went wrong";
       });

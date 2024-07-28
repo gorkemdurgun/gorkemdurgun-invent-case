@@ -14,7 +14,7 @@ function createYearList(list: Movie[]): OptionItem[] {
   }));
 }
 
-export const fetchMovies = createAsyncThunk(
+export const getMovies = createAsyncThunk(
   "movies/fetchMovies",
   async ({ term, page, type, year }: { term: string; page: number; type?: string; year?: string }) => {
     const params = new URLSearchParams();
@@ -28,7 +28,7 @@ export const fetchMovies = createAsyncThunk(
     }
     params.append("page", page.toString());
 
-    const response = await api.get<FetchMoviesResponse>(`?${params.toString()}`);
+    const response = await api.get<GetMoviesResponse>(`?${params.toString()}`);
     const yearList = createYearList(response.data.Search);
 
     return {
