@@ -12,9 +12,10 @@ interface Movie {
   Poster: string;
 }
 
-type Genre = "movie" | "series" | "episode";
+type Genre = "movie" | "series" | "episode" | undefined;
 
 type OptionItem = {
+  disabled?: boolean;
   key: string;
   value: string;
   label: string;

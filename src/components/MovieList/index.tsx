@@ -1,9 +1,9 @@
 import Image from "next/image";
 import styles from "./index.module.scss";
 import { PiArrowFatRightDuotone as GoDetailIcon, PiX as NotFoundIcon } from "react-icons/pi";
+import { useAppSelector } from "@/hooks";
 
 type Props = {
-  movies: Movie[];
   displayType: "grid" | "table";
 };
 type CardProps = {
@@ -42,7 +42,6 @@ const GridCard: React.FC<CardProps> = ({ movie }) => {
     </div>
   );
 };
-
 const TableCard: React.FC<CardProps> = ({ movie }) => {
   return (
     <tr className={styles.tableRow}>
@@ -66,10 +65,12 @@ const TableCard: React.FC<CardProps> = ({ movie }) => {
   );
 };
 
-const MovieList: React.FC<Props> = ({ displayType, movies }) => {
+const MovieList: React.FC<Props> = ({ displayType }) => {
+  const { list } = useAppSelector((state) => state.movies);
+
   return displayType === "grid" ? (
     <ul className={styles.grid}>
-      {movies.map((movie) => (
+      {list?.map((movie) => (
         <GridCard key={movie.imdbID} movie={movie} />
       ))}
     </ul>
@@ -84,7 +85,7 @@ const MovieList: React.FC<Props> = ({ displayType, movies }) => {
         </tr>
       </thead>
       <tbody>
-        {movies.map((movie) => (
+        {list?.map((movie) => (
           <TableCard key={movie.imdbID} movie={movie} />
         ))}
       </tbody>

@@ -11,10 +11,7 @@ type Props = {
 const SelectBox: React.FC<Props> = ({ undefinedValueLabel, options, value, onChange }) => {
   const selectRef = useRef<HTMLSelectElement>(null);
 
-  console.log("SelectBox render", value);
-
   function onSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    console.log("SelectBox change", e);
     onChange(e.target.value);
   }
 
@@ -23,7 +20,7 @@ const SelectBox: React.FC<Props> = ({ undefinedValueLabel, options, value, onCha
       <select ref={selectRef} className={styles.select} value={value} onChange={onSelectChange}>
         <option value="">{undefinedValueLabel || "Select..."}</option>
         {options.map((option) => (
-          <option key={option.key} value={option.value}>
+          <option key={option.key} value={option.value} disabled={option.disabled}>
             {option.label}
           </option>
         ))}
