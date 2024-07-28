@@ -3,14 +3,14 @@ import styles from "./index.module.scss";
 import { PiGridFourDuotone as GridIcon, PiTableDuotone as TableIcon } from "react-icons/pi";
 
 type DisplayTypeButtonProps = {
-  activeType: "grid" | "table";
-  onTypeChange: (type: "grid" | "table") => void;
+  activeType: DisplayType;
+  onTypeChange: (type: DisplayType) => void;
 };
 
 const DisplayTypeButton = ({ activeType, onTypeChange }: DisplayTypeButtonProps) => {
-  const [activeDisplayType, setActiveDisplayType] = useState<"grid" | "table">(activeType);
+  const [activeDisplayType, setActiveDisplayType] = useState<DisplayType>(activeType);
 
-  function onChange(type: "grid" | "table") {
+  function onChange(type: DisplayType) {
     setActiveDisplayType(type);
     onTypeChange(type);
   }

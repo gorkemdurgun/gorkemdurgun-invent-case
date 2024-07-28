@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { services } from "@/services";
 
 type Props = {
-  displayType: "grid" | "table";
+  displayType: DisplayType;
   onError?: () => void;
 };
 type CardProps = {

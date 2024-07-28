@@ -44,6 +44,8 @@ interface MovieDetail {
 
 type Genre = "movie" | "series" | "episode" | undefined;
 
+type DisplayType = "table" | "grid";
+
 type OptionItem = {
   disabled?: boolean;
   key: string;

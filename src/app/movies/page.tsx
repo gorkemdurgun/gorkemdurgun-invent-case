@@ -15,7 +15,7 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const { totalResults, initialYearList } = useAppSelector((state) => state.movies);
 
-  const [activeDisplayType, setActiveDisplayType] = useState<"grid" | "table">("grid");
+  const [activeDisplayType, setActiveDisplayType] = useState<DisplayType>("grid");
   const [activeSearch, setActiveSearch] = useState("Pokemon");
   const [activePage, setActivePage] = useState(1);
   const [activeYear, setActiveYear] = useState<string>("");
