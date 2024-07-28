@@ -16,6 +16,10 @@
   gap: 5px;
   margin-block: 20px;
 
+  .breadcrumbSkeleton {
+    width: 200px !important;
+  }
+
   .breadcrumbItem {
     font-size: 16px;
     color: white;
@@ -55,11 +59,11 @@
       }
     }
     &[data-type="directors"] {
-        .listItem {
-          background-color: hsla(12, 90%, 65%, 0.1);
-          color: hsl(12, 90%, 65%);
-        }
+      .listItem {
+        background-color: hsla(12, 90%, 65%, 0.1);
+        color: hsl(12, 90%, 65%);
       }
+    }
     &[data-type="writers"] {
       .listItem {
         background-color: hsla(23, 90%, 65%, 0.1);

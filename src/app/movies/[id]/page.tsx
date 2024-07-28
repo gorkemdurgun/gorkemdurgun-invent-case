@@ -19,17 +19,25 @@ import {
   PiStarFill as StarFillIcon,
 } from "react-icons/pi";
 import { timeAgo } from "@/utils/moment";
+import Skeleton from "@/components/Skeleton";
 
 const MovieIdPage = () => {
   const pathname = usePathname();
   const movieId = pathname.split("/")[2];
 
+  const [loading, setLoading] = useState(true);
   const [movieDetail, setMovieDetail] = useState<MovieDetail | undefined>(undefined);
 
   function getMovie() {
-    services.getMovieById(movieId).then((movieDetail) => {
-      setMovieDetail(movieDetail);
-    });
+    setLoading(true);
+    services
+      .getMovieById(movieId)
+      .then((movieDetail) => {
+        setMovieDetail(movieDetail);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   useEffect(() => {
@@ -62,130 +70,166 @@ const MovieIdPage = () => {
         <a className={styles.breadcrumbItem} href="/movies">
           Movies
         </a>
-        <a className={styles.breadcrumbItem}>{movieDetail?.Title}</a>
+        {loading ? (
+          <Skeleton className={styles.breadcrumbSkeleton} skeletonType="text" />
+        ) : (
+          <a className={styles.breadcrumbItem}>{movieDetail?.Title}</a>
+        )}
       </div>
       <div className={styles.main}>
         <div className={styles.leftContainer}>
-          <div className={styles.posterContainer}>
-            {movieDetail?.Poster && movieDetail?.Poster !== "N/A" ? (
-              <Image
-                className={styles.poster}
-                src={movieDetail?.Poster}
-                alt={movieDetail?.Title || "Movie Poster"}
-                layout="fill"
-                objectFit="cover"
-              />
-            ) : (
-              <div className={styles.noPoster}>No Poster</div>
-            )}
-          </div>
-          <div className={styles.briefContainer}>
-            {movieDetail?.Language !== "N/A" && (
-              <div className={styles.brief}>
-                <LanguageIcon className={styles.icon} />
-                <span className={styles.text}>{movieDetail?.Language}</span>
-              </div>
-            )}
-            {movieDetail?.Country !== "N/A" && (
-              <div className={styles.brief}>
-                <CountryIcon className={styles.icon} />
-                <span className={styles.text}>{movieDetail?.Country}</span>
-              </div>
-            )}
-          </div>
+          {loading ? (
+            <Skeleton className={styles.posterContainer} skeletonType="rect" />
+          ) : (
+            <div className={styles.posterContainer}>
+              {movieDetail?.Poster && movieDetail?.Poster !== "N/A" ? (
+                <Image
+                  className={styles.poster}
+                  src={movieDetail?.Poster}
+                  alt={movieDetail?.Title || "Movie Poster"}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              ) : (
+                <div className={styles.noPoster}>No Poster</div>
+              )}
+            </div>
+          )}
+          {loading ? (
+            <Skeleton skeletonType="text" />
+          ) : (
+            <div className={styles.briefContainer}>
+              {movieDetail?.Language !== "N/A" && (
+                <div className={styles.brief}>
+                  <LanguageIcon className={styles.icon} />
+                  <span className={styles.text}>{movieDetail?.Language}</span>
+                </div>
+              )}
+              {movieDetail?.Country !== "N/A" && (
+                <div className={styles.brief}>
+                  <CountryIcon className={styles.icon} />
+                  <span className={styles.text}>{movieDetail?.Country}</span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <div className={styles.middleContainer}>
-          <div className={styles.dates}>
-            <div className={styles.duration}>
-              <ClockIcon className={styles.durationIcon} />
-              <span className={styles.durationText}>{movieDetail?.Runtime !== "N/A" ? movieDetail?.Runtime : "-"}</span>
+          {loading ? (
+            <Skeleton skeletonType="text" />
+          ) : (
+            <div className={styles.dates}>
+              <div className={styles.duration}>
+                <ClockIcon className={styles.durationIcon} />
+                <span className={styles.durationText}>{movieDetail?.Runtime !== "N/A" ? movieDetail?.Runtime : "-"}</span>
+              </div>
+              <div className={styles.releaseDate}>
+                <CalendarIcon className={styles.releaseDateIcon} />
+                <span className={styles.releaseDateText}>{movieDetail?.Released !== "N/A" ? movieDetail?.Released : "-"}</span>
+                <span className={styles.releaseDateText}>{timeAgo(movieDetail?.Released)}</span>
+              </div>
             </div>
-            <div className={styles.releaseDate}>
-              <CalendarIcon className={styles.releaseDateIcon} />
-              <span className={styles.releaseDateText}>{movieDetail?.Released !== "N/A" ? movieDetail?.Released : "-"}</span>
-              <span className={styles.releaseDateText}>{timeAgo(movieDetail?.Released)}</span>
-            </div>
-          </div>
+          )}
           <Divider />
           <div className={styles.informations}>
-            <h1 className={styles.title}>{movieDetail?.Title}</h1>
-            <p className={styles.description}>{movieDetail?.Plot}</p>
+            {loading ? <Skeleton skeletonType="text" /> : <h1 className={styles.title}>{movieDetail?.Title}</h1>}
+            {loading ? <Skeleton skeletonType="text" /> : <p className={styles.description}>{movieDetail?.Plot}</p>}
           </div>
           <div className={styles.extraInformations}>
-            <div className={styles.ratingContainer}>
-              <span className={styles.score}>
-                <span className={styles.rating}>{movieDetail?.imdbRating}/10</span>
-                <span className={styles.text}>on IMDb</span>
-                <span className={styles.text}>({movieDetail?.imdbVotes})</span>
-              </span>
-              <div className={styles.stars}>{calculateRating(movieDetail?.imdbRating || "0")}</div>
-            </div>
-            <span className={styles.imdbId}>{movieDetail?.imdbID}</span>
+            {loading ? (
+              <Skeleton skeletonType="text" />
+            ) : (
+              <div className={styles.ratingContainer}>
+                <span className={styles.score}>
+                  <span className={styles.rating}>{movieDetail?.imdbRating}/10</span>
+                  <span className={styles.text}>on IMDb</span>
+                  <span className={styles.text}>({movieDetail?.imdbVotes})</span>
+                </span>
+                <div className={styles.stars}>{calculateRating(movieDetail?.imdbRating || "0")}</div>
+              </div>
+            )}
+            {loading ? <Skeleton skeletonType="text" /> : <span className={styles.imdbId}>{movieDetail?.imdbID}</span>}
           </div>
         </div>
         <div className={styles.rightContainer}>
-          {movieDetail?.Genre !== "N/A" && (
-            <>
-              <div className={styles.list} data-type="categories">
-                <h1 className={styles.title}>Categories</h1>
-                <div className={styles.listItems}>
-                  {movieDetail?.Genre?.split(", ").map((genre) => (
-                    <span key={genre} className={styles.listItem}>
-                      <CategoryIcon className={styles.icon} />
-                      <span className={styles.text}>{genre}</span>
-                    </span>
-                  ))}
+          {loading ? (
+            <Skeleton skeletonType="rect" />
+          ) : (
+            movieDetail?.Genre !== "N/A" && (
+              <>
+                <div className={styles.list} data-type="categories">
+                  <h1 className={styles.title}>Categories</h1>
+                  <div className={styles.listItems}>
+                    {movieDetail?.Genre?.split(", ").map((genre) => (
+                      <span key={genre} className={styles.listItem}>
+                        <CategoryIcon className={styles.icon} />
+                        <span className={styles.text}>{genre}</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <Divider />
-            </>
+                <Divider />
+              </>
+            )
           )}
-          {movieDetail?.Director !== "N/A" && (
-            <>
-              <div className={styles.list} data-type="directors">
-                <span className={styles.title}>Directors</span>
-                <div className={styles.listItems}>
-                  {movieDetail?.Director?.split(", ").map((director) => (
-                    <span key={director} className={styles.listItem}>
-                      <DirectorIcon className={styles.icon} />
-                      <span className={styles.text}>{director}</span>
-                    </span>
-                  ))}
+          {loading ? (
+            <Skeleton skeletonType="rect" />
+          ) : (
+            movieDetail?.Director !== "N/A" && (
+              <>
+                <div className={styles.list} data-type="directors">
+                  <span className={styles.title}>Directors</span>
+                  <div className={styles.listItems}>
+                    {movieDetail?.Director?.split(", ").map((director) => (
+                      <span key={director} className={styles.listItem}>
+                        <DirectorIcon className={styles.icon} />
+                        <span className={styles.text}>{director}</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <Divider />
-            </>
+                <Divider />
+              </>
+            )
           )}
-          {movieDetail?.Writer !== "N/A" && (
-            <>
-              <div className={styles.list} data-type="writers">
-                <span className={styles.title}>Writers</span>
-                <div className={styles.listItems}>
-                  {movieDetail?.Writer?.split(", ").map((writer) => (
-                    <span key={writer} className={styles.listItem}>
-                      <WriterIcon className={styles.icon} />
-                      <span className={styles.text}>{writer}</span>
-                    </span>
-                  ))}
+          {loading ? (
+            <Skeleton skeletonType="rect" />
+          ) : (
+            movieDetail?.Writer !== "N/A" && (
+              <>
+                <div className={styles.list} data-type="writers">
+                  <span className={styles.title}>Writers</span>
+                  <div className={styles.listItems}>
+                    {movieDetail?.Writer?.split(", ").map((writer) => (
+                      <span key={writer} className={styles.listItem}>
+                        <WriterIcon className={styles.icon} />
+                        <span className={styles.text}>{writer}</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <Divider />
-            </>
+                <Divider />
+              </>
+            )
           )}
-          {movieDetail?.Actors !== "N/A" && (
-            <>
-              <div className={styles.list} data-type="actors">
-                <span className={styles.title}>Actors</span>
-                <div className={styles.listItems}>
-                  {movieDetail?.Actors?.split(", ").map((actor) => (
-                    <span key={actor} className={styles.listItem}>
-                      <ActorIcon className={styles.icon} />
-                      <span className={styles.text}>{actor}</span>
-                    </span>
-                  ))}
+          {loading ? (
+            <Skeleton skeletonType="rect" />
+          ) : (
+            movieDetail?.Actors !== "N/A" && (
+              <>
+                <div className={styles.list} data-type="actors">
+                  <span className={styles.title}>Actors</span>
+                  <div className={styles.listItems}>
+                    {movieDetail?.Actors?.split(", ").map((actor) => (
+                      <span key={actor} className={styles.listItem}>
+                        <ActorIcon className={styles.icon} />
+                        <span className={styles.text}>{actor}</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </>
+              </>
+            )
           )}
         </div>
       </div>
