@@ -130,7 +130,11 @@ const MovieIdPage = () => {
           <Divider />
           <div className={styles.informations}>
             {loading ? <Skeleton skeletonType="text" /> : <h1 className={styles.title}>{movieDetail?.Title}</h1>}
-            {loading ? <Skeleton skeletonType="text" /> : <p className={styles.description}>{movieDetail?.Plot}</p>}
+            {loading ? (
+              <Skeleton skeletonType="text" />
+            ) : (
+              <p className={styles.description}>{movieDetail?.Plot !== "N/A" ? movieDetail?.Plot : "No description available"}</p>
+            )}
           </div>
           <div className={styles.extraInformations}>
             {loading ? (
@@ -138,9 +142,13 @@ const MovieIdPage = () => {
             ) : (
               <div className={styles.ratingContainer}>
                 <span className={styles.score}>
-                  <span className={styles.rating}>{movieDetail?.imdbRating}/10</span>
+                  {movieDetail?.imdbRating !== "N/A" ? (
+                    <span className={styles.rating}>{movieDetail?.imdbRating}/10</span>
+                  ) : (
+                    <span className={styles.rating}>Rating not available</span>
+                  )}
                   <span className={styles.text}>on IMDb</span>
-                  <span className={styles.text}>({movieDetail?.imdbVotes})</span>
+                  {movieDetail?.imdbVotes !== "N/A" && <span className={styles.text}>({movieDetail?.imdbVotes})</span>}
                 </span>
                 <div className={styles.stars}>{calculateRating(movieDetail?.imdbRating || "0")}</div>
               </div>
