@@ -1,8 +1,9 @@
 .pagination {
-  display: flex;
-  justify-content: center;
-  margin-block: 3rem;
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  grid-gap: 0.7rem;
+  margin: 2rem 0;
 
   .item {
     display: flex;
@@ -19,7 +20,7 @@
     transition: all 0.3s ease-in-out;
 
     &:hover {
-        background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.5);
     }
   }
 

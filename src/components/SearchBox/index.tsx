@@ -3,15 +3,15 @@ import styles from "./index.module.scss";
 import { useState } from "react";
 
 type Props = {
-  onSubmit: (search: string) => void;
+  onSearch: (search: string) => void;
 };
 
-const SearchBox: React.FC<Props> = ({ onSubmit }) => {
+const SearchBox: React.FC<Props> = ({ onSearch }) => {
   const [value, setValue] = useState("Pokemon");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(value);
+    onSearch(value);
   };
 
   let searchBtnDisabled = !value || value === "";

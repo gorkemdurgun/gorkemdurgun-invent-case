@@ -1,23 +1,24 @@
 import styles from "./index.module.scss";
 
 type Props = {
-  totalPages: number;
+  totalResults: number;
+  perPage: number;
   currentPage: number;
   onPageChange: (page: number) => void;
 };
 
-const Pagination: React.FC<Props> = ({ totalPages, currentPage, onPageChange }) => {
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+const Pagination: React.FC<Props> = ({ totalResults, perPage, currentPage, onPageChange }) => {
+  const totalPages = Math.ceil(totalResults / perPage);
 
   return (
     <div className={styles.pagination}>
-      {pages.map((page) => (
+      {Array.from({ length: totalPages }).map((_, index) => (
         <button
-          key={page}
-          className={page === currentPage ? styles.active : styles.item}
-          onClick={() => onPageChange(page)}
+          key={index}
+          className={`${styles.page} ${currentPage === index + 1 ? styles.active : styles.item}`}
+          onClick={() => onPageChange(index + 1)}
         >
-          {page}
+          {index + 1}
         </button>
       ))}
     </div>

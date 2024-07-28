@@ -24,8 +24,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           <Image
             src={movie.Poster}
             alt={movie.Title}
-            width={300}
-            height={450}
+            layout="fill"
+            objectFit="cover"
           />
         </div>
       )

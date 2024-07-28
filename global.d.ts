@@ -5,3 +5,5 @@ interface Movie {
   Type: string;
   Poster: string;
 }
+
+type Genre = "movie" | "series" | "episode" | undefined;

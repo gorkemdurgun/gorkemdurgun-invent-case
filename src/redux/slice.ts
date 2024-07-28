@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface MovieState {
   list: Movie[];
+  totalResults: number;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: MovieState = {
   list: [],
+  totalResults: 0,
   loading: false,
   error: null,
 };
@@ -24,7 +26,8 @@ const moviesSlice = createSlice({
       })
       .addCase(services.fetchMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.list = action.payload;
+        state.list = action.payload.list;
+        state.totalResults = action.payload.totalResults;
       })
       .addCase(services.fetchMovies.rejected, (state, action) => {
         state.loading = false;
