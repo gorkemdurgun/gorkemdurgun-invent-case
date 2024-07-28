@@ -1,7 +1,6 @@
 import Link from "next/link";
-
 import styles from "./index.module.scss";
-import Skeleton from "@/components/Skeleton";
+import Skeleton from "@/components/common/Skeleton";
 
 type BreadcrumbProps = {
   items: BreadcrumbItem[];

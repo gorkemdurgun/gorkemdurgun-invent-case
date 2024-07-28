@@ -5,11 +5,11 @@ import { services } from "@/services";
 import { resetFilter } from "@/redux/slice";
 import { genreOptions } from "@/constants/genre-options";
 import { useEffect, useState } from "react";
-import MovieList from "@/components/MovieList";
-import SearchBox from "@/components/SearchBox";
-import SelectBox from "@/components/SelectBox";
-import Pagination from "@/components/Pagination";
-import DisplayTypeButton from "@/components/DisplayTypeButton";
+import Pagination from "@/components/common/Pagination";
+import MovieList from "@/components/movies/MovieList";
+import SearchBox from "@/components/movies/SearchBox";
+import SelectBox from "@/components/movies/SelectBox";
+import DisplayTypeButton from "@/components/movies/DisplayTypeButton";
 
 export default function Home() {
   const dispatch = useAppDispatch();

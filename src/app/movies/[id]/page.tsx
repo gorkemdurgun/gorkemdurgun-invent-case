@@ -19,7 +19,7 @@ import {
   PiStarFill as StarFillIcon,
 } from "react-icons/pi";
 import { timeAgo } from "@/utils/moment";
-import Skeleton from "@/components/Skeleton";
+import Skeleton from "@/components/common/Skeleton";
 import Breadcrumb from "@/components/common/Breadcrumb";
 
 const MovieIdPage = () => {
