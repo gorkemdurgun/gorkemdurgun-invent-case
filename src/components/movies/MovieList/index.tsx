@@ -19,14 +19,14 @@ const MovieList: React.FC<Props> = ({ displayType, onError }) => {
     onError && onError();
   }
 
-  if (!loading) {
+  if (loading) {
     return <Loading />;
   }
 
   if (error) {
     return (
       <button className="w-full p-2 text-center text-xl text-red-700 bg-red-300 rounded-md" onClick={handleTryAgain}>
-        Any result found, try again with clear filters
+        Any result found, try again with clear filters or different search term.
       </button>
     );
   }

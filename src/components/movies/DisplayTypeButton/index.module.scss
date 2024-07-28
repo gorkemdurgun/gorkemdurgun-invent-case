@@ -4,4 +4,8 @@
   justify-content: center;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 0.5rem;
+
+  &[disabled] {
+    color: darkgray;
+  }
 }
