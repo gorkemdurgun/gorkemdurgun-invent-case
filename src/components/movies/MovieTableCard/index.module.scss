@@ -1,0 +1,40 @@
+.tableRow {
+  cursor: pointer;
+  display: table-row;
+  border-bottom: 1px solid #e0e0e0;
+  color: #efefef;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: white;
+    background: #333;
+    > td .poster {
+      border: 2px white solid;
+    }
+  }
+}
+
+.tableCell {
+  padding-block: 10px;
+
+  .poster {
+    position: relative;
+    width: 100px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    border: 2px transparent solid;
+    transition: border 0.3s ease-in-out;
+
+    .noPoster {
+      width: 100px;
+      min-height: 120px;
+      border-radius: 0.5rem;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}
