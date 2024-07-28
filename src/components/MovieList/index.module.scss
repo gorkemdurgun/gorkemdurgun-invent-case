@@ -1,3 +1,5 @@
+// Grid View
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -33,10 +35,11 @@
     .noPoster {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+
       border-radius: 0.5rem;
       background: #333;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -121,5 +124,64 @@
 
   &:hover .overlay {
     opacity: 1;
+  }
+}
+
+// Table View
+
+.table {
+  width: 100%;
+  height: 100%;
+  width: 100%;
+  table-layout: fixed;
+  text-align: left;
+}
+
+.tableHead {
+  background-color: #eceff1;
+  color: black;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.tableRow {
+  cursor: pointer;
+  display: table-row;
+  border-bottom: 1px solid #e0e0e0;
+  color: #efefef;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: white;
+    background: #333;
+    > td .poster {
+      border: 2px white solid;
+    }
+  }
+}
+
+.tableCell {
+  padding-block: 10px;
+
+  .poster {
+    position: relative;
+    width: 100px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    border: 2px transparent solid;
+    transition: border 0.3s ease-in-out;
+
+    .noPoster {
+      width: 100px;
+      min-height: 120px;
+      border-radius: 0.5rem;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
   }
 }

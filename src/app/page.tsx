@@ -8,6 +8,7 @@ import MovieList from "@/components/MovieList";
 import SearchBox from "@/components/SearchBox";
 import SelectBox from "@/components/SelectBox";
 import Pagination from "@/components/Pagination";
+import DisplayTypeButton from "@/components/DisplayTypeButton";
 
 const yearOptions = [
   { value: "2024", label: "2024" },
@@ -30,6 +31,7 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const { list, totalResults, loading, error } = useAppSelector((state) => state.movies);
 
+  const [activeDisplayType, setActiveDisplayType] = useState<"grid" | "table">("grid");
   const [activeSearch, setActiveSearch] = useState("Pokemon");
   const [activePage, setActivePage] = useState(1);
   const [activeYear, setActiveYear] = useState<string | undefined>(undefined);
@@ -46,7 +48,8 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center gap-4 p-24">
       <h1 className="text-4xl font-bold">Movies</h1>
-      <div className="w-full grid grid-cols-[1fr,1fr,5fr] gap-4">
+      <div className="w-full grid grid-cols-[80px_2fr,2fr,5fr] gap-4">
+        <DisplayTypeButton activeType={activeDisplayType} onTypeChange={setActiveDisplayType} />
         <SelectBox options={yearOptions} value={activeYear} onChange={(value) => setActiveYear(value)} />
         <SelectBox options={genreOptions} value={activeGenre} onChange={(value) => setActiveGenre(value as Genre)} />
         <SearchBox onSearch={onSearch} />
@@ -56,7 +59,7 @@ export default function Home() {
       {!loading && !error && !list && <p>No movies found</p>}
       {list && list.length > 0 && (
         <div className="w-full flex flex-col items-center gap-4">
-          <MovieList movies={list} />
+          <MovieList movies={list} displayType={activeDisplayType} />
           <Pagination totalResults={totalResults} perPage={10} currentPage={activePage} onPageChange={setActivePage} />
         </div>
       )}
