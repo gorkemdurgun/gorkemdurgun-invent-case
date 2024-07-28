@@ -15,8 +15,10 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const { totalResults, initialYearList } = useAppSelector((state) => state.movies);
 
+  const lastSearch = localStorage.getItem("lastSearch");
+
   const [activeDisplayType, setActiveDisplayType] = useState<DisplayType>("grid");
-  const [activeSearch, setActiveSearch] = useState("Pokemon");
+  const [activeSearch, setActiveSearch] = useState(lastSearch || "Pokemon");
   const [activePage, setActivePage] = useState(1);
   const [activeYear, setActiveYear] = useState<string>("");
   const [activeGenre, setActiveGenre] = useState<string>("");
@@ -72,7 +74,7 @@ export default function Home() {
           value={activeGenre}
           onChange={(value) => setActiveGenre(value)}
         />
-        <SearchBox onSearch={onSearch} />
+        <SearchBox activeSearch={activeSearch} onSearch={onSearch} />
       </div>
       <div className="w-full flex flex-col items-center gap-4">
         <MovieList displayType={activeDisplayType} onError={onError} />

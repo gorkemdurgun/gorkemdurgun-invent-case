@@ -3,11 +3,12 @@ import styles from "./index.module.scss";
 import { useState } from "react";
 
 type Props = {
+  activeSearch: string;
   onSearch: (search: string) => void;
 };
 
-const SearchBox: React.FC<Props> = ({ onSearch }) => {
-  const [value, setValue] = useState("Pokemon");
+const SearchBox: React.FC<Props> = ({ activeSearch, onSearch }) => {
+  const [value, setValue] = useState(activeSearch);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

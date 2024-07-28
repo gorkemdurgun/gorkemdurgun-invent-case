@@ -32,6 +32,8 @@ export const getMovies = createAsyncThunk(
     const response = await api.get<GetMoviesResponse>(`?${params.toString()}`);
     const yearList = createYearList(response.data.Search);
 
+    localStorage.setItem("lastSearch", term);
+
     return {
       list: response.data.Search,
       totalResults: response.data.totalResults,
