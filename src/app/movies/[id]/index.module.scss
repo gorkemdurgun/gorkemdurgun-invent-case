@@ -6,7 +6,7 @@
 
 .divider {
   border-top: 2px solid white;
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .list {
@@ -107,6 +107,8 @@
   .infoContainer {
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    background-color: hsla(0, 0%, 20%, 0.15);
 
     .dates {
       display: flex;
@@ -153,7 +155,6 @@
       flex-direction: column;
       gap: 10px;
       border-top: 2px solid white;
-      padding-top: 10px;
 
       .title {
         font-size: 24px;
