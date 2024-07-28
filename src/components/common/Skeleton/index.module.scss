@@ -1,5 +1,7 @@
+@import '../../../styles/globals.scss';
+
 .skeleton {
-  background-color: #f0f0f0;
+  background-color: $skeleton-bg;
   border-radius: 4px;
   display: inline-block;
   height: 10em;

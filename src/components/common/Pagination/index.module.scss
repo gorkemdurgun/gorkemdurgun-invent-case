@@ -1,3 +1,5 @@
+@import "../../../styles/globals.scss";
+
 .pagination {
   width: 100%;
   display: grid;
@@ -13,20 +15,20 @@
     height: 50px;
     margin: 0 5px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: $bg-opaque-lightGray;
     border: 2px solid transparent;
-    color: white;
+    color: $color-white;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: $bg-opaque-white;
     }
   }
 
   .active {
     @extend .item;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: $bg-opaque-white;
     border: 2px solid white;
   }
 }

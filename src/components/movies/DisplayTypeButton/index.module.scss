@@ -1,11 +1,14 @@
+@import '../../../styles/globals.scss';
+
+
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: $bg-opaque-lighterGray;
   border-radius: 0.5rem;
 
   &[disabled] {
-    color: darkgray;
+    color: $disabled;
   }
 }

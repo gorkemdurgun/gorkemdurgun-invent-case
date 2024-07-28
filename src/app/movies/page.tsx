@@ -54,7 +54,7 @@ export default function Home() {
   }, [activeSearch, activePage, activeYear, activeGenre]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center gap-6 p-24">
+    <main className="flex min-h-screen flex-col items-center gap-6">
       <h1 className="text-4xl font-bold">Movie List from OMDB API</h1>
       <div className="w-full grid grid-cols-[80px_2fr,2fr,5fr] gap-4">
         <DisplayTypeButton disabled={totalResults === 0} activeType={activeDisplayType} onTypeChange={setActiveDisplayType} />

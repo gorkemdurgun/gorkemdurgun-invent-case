@@ -1,3 +1,5 @@
+@import "../../../styles/globals.scss";
+
 .card {
   cursor: pointer;
   position: relative;
@@ -10,7 +12,7 @@
   border-radius: 0.5rem;
   transition: transform 0.3s ease-in-out;
   text-align: center;
-  border: 2px white solid;
+  border: 2px $color-white solid;
 
   &:hover {
     transform: scale(1.05);
@@ -28,7 +30,7 @@
       height: 100%;
 
       border-radius: 0.5rem;
-      background: #333;
+      background: $color-black-warm;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -55,8 +57,8 @@
     left: 0;
     width: 100%;
 
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
+    background: $overlay-bg;
+    color: $color-white;
     padding: 1rem;
     transition: all 0.3s ease-in-out;
     z-index: 1;
@@ -76,7 +78,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: rgba(255, 255, 255, 0.1);
+        background: $bg-opaque-lighterGray;
         border-radius: 0.5rem;
         padding: 0.2rem;
       }
@@ -93,12 +95,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: $overlay-bg;
     opacity: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: $color-white;
     transition: opacity 0.3s ease-in-out;
     border-radius: 0.5rem;
     padding: 1rem;
